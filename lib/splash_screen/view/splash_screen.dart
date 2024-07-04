@@ -3,19 +3,47 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../utils/image_paths.dart';
 import '../../utils/widgets/custom_button.dart';
 
-/// A stateless widget that represents the splash screen.
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize animation controller
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+
+    // Start animation
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Dispose controller
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // Retrieves the size of the device screen.
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Stack(
       children: [
-        // Background image covering the entire screen.
         Positioned.fill(
           child: Image.asset(
             ImagePaths.splashBackground,
@@ -29,12 +57,15 @@ class SplashScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             body: Column(
               children: [
-                Center(
-                  child: Text(
-                    'AspeN',
-                    style: GoogleFonts.dancingScript(
-                      fontSize: screenWidth * 0.32,
-                      color: Colors.white,
+                FadeTransition(
+                  opacity: _animation,
+                  child: Center(
+                    child: Text(
+                      'AspeN',
+                      style: GoogleFonts.dancingScript(
+                        fontSize: screenWidth * 0.32,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -91,7 +122,7 @@ class SplashScreen extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
