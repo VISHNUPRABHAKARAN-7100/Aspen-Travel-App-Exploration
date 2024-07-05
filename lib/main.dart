@@ -1,5 +1,7 @@
+import 'package:aspen_travel_app_exploration/home_screen/provider/home_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'splash_screen/view/splash_screen.dart';
 
 void main() {
@@ -20,12 +22,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => HomeScreenProvider(),
+        )
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
     );
   }
 }
