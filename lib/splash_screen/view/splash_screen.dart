@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'animated_bottom_sheet.dart';
+import 'widgets/animated_bottom_sheet.dart';
 import 'widgets/fade_in_title.dart';
 import 'widgets/splash_screen_back_ground_image.dart';
 

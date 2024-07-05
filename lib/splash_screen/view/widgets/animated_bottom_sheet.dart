@@ -1,7 +1,7 @@
+import 'package:aspen_travel_app_exploration/home_screen/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../utils/widgets/custom_button.dart';
+import '../../../utils/widgets/custom_button.dart';
 
 class AnimatedBottomSheet extends StatelessWidget {
   final bool isVisible;
@@ -53,7 +53,45 @@ class AnimatedBottomSheet extends StatelessWidget {
               borderRadius: 15,
               buttonWidth: screenWidth * 0.9,
               buttonHeight: screenHeight * 0.06,
-              onPressed: () {},
+              // onPressed: () {
+              //   Navigator.push(
+              //     context,
+              //     PageRouteBuilder(
+              //       pageBuilder: (context, animation, secondaryAnimation) =>
+              //           const HomeScreen(),
+              //       transitionDuration: const Duration(milliseconds: 600),
+              //       transitionsBuilder:
+              //           (context, animation, secondaryAnimation, child) =>
+              //               FadeTransition(
+              //         opacity: animation,
+              //         child: child,
+              //       ),
+              //     ),
+              //   );
+              // },
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const HomeScreen(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(1.0, 0.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
               childWidget: Text(
                 'Explore',
                 style: GoogleFonts.baskervville(
