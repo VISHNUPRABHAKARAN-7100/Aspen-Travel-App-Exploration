@@ -17,7 +17,7 @@ class AnimatedBottomSheet extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 900),
+      duration: const Duration(milliseconds: 700),
       top: isVisible ? screenHeight - (screenHeight * 0.33) : screenHeight,
       left: 0,
       right: 0,
@@ -53,22 +53,6 @@ class AnimatedBottomSheet extends StatelessWidget {
               borderRadius: 15,
               buttonWidth: screenWidth * 0.9,
               buttonHeight: screenHeight * 0.06,
-              // onPressed: () {
-              //   Navigator.push(
-              //     context,
-              //     PageRouteBuilder(
-              //       pageBuilder: (context, animation, secondaryAnimation) =>
-              //           const HomeScreen(),
-              //       transitionDuration: const Duration(milliseconds: 600),
-              //       transitionsBuilder:
-              //           (context, animation, secondaryAnimation, child) =>
-              //               FadeTransition(
-              //         opacity: animation,
-              //         child: child,
-              //       ),
-              //     ),
-              //   );
-              // },
               onPressed: () {
                 Navigator.push(
                   context,
