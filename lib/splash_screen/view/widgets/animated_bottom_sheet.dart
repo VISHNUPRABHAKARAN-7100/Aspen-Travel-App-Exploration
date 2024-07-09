@@ -1,4 +1,4 @@
-import 'package:aspen_travel_app_exploration/home_screen/view/home_screen.dart';
+import 'package:aspen_travel_app_exploration/bottom_nav/view/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -58,7 +58,7 @@ class AnimatedBottomSheet extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const HomeScreen(),
+                        BottomNav(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, child) {
                       var begin = const Offset(1.0, 0.0);

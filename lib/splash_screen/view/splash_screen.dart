@@ -10,35 +10,23 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
-  late final Animation<double> _fadeInAnimation;
+class _SplashScreenState extends State<SplashScreen> {
   bool _isBottomSheetVisible = false;
+  bool _isTitleVisible = false;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
+
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        setState(() {
+          _isTitleVisible = true;
+          _isBottomSheetVisible = true;
+        });
+      },
     );
-
-    _fadeInAnimation =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
-    _animationController.forward();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  void _toggleBottomSheet() {
-    setState(() {
-      _isBottomSheetVisible = true;
-    });
   }
 
   @override
@@ -47,20 +35,19 @@ class _SplashScreenState extends State<SplashScreen>
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: GestureDetector(
-        onTap: _toggleBottomSheet,
-        child: SizedBox(
-          height: screenHeight,
-          width: screenWidth,
-          child: Stack(
-            children: [
-              const SplashScreenBackgroundImage(),
-              FadeInTitle(animation: _fadeInAnimation),
-              AnimatedBottomSheet(
-                isVisible: _isBottomSheetVisible,
-              ),
-            ],
-          ),
+      body: SizedBox(
+        height: screenHeight,
+        width: screenWidth,
+        child: Stack(
+          children: [
+            const SplashScreenBackgroundImage(),
+            FadeInTitle(
+              isVisible: _isTitleVisible,
+            ),
+            AnimatedBottomSheet(
+              isVisible: _isBottomSheetVisible,
+            ),
+          ],
         ),
       ),
     );

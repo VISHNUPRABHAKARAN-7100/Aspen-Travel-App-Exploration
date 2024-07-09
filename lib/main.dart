@@ -1,3 +1,4 @@
+import 'package:aspen_travel_app_exploration/bottom_nav/provider/bottom_nav_provider.dart';
 import 'package:aspen_travel_app_exploration/home_screen/provider/home_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => HomeScreenProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BottomNavProvider(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
